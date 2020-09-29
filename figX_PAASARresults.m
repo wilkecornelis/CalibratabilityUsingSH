@@ -31,7 +31,7 @@ g_mag_vec = g_mag_vec(SIR_cal_ind);
 [SIR_sorted, sortorder] = sort(SIR_vec);
 % 
 % figure
-semilogy((SIR_sorted),g_rmse_vec(sortorder), 'k.-');
+semilogy((SIR_sorted),rad2deg(g_phase_vec(sortorder)), 'k.-');
 title('RMS gain error as a function of SIR')
 ylabel('RMS gain error')
 xlabel('SIR (dB)')

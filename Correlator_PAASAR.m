@@ -17,7 +17,8 @@ function [Sigma] = Correlator(sigmas,SNR,Lsignal,lmn,EEP,P,D,k)
 %   returns
 %   Sigma           : Array covariance matrix
 
-% CRW 10 February 2020     
+% Nelis Wilke 10 February 2020     
+% Copyright 2020. See the LICENSE file at the top-level directory of this distribution.
 
 % Matrix of source signals
 s_t = (sqrt(sigmas).*((randn(length(lmn), Lsignal) + 1i * randn(length(lmn), Lsignal))))/sqrt(2);  

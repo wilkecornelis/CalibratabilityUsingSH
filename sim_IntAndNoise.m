@@ -6,7 +6,7 @@
 % determine the performance as a function of interference and noise level,
 %
 % Nelis Wilke, 28 March 2020
-
+% Copyright 2020. See the LICENSE file at the top-level directory of this distribution.
 
 close all
 clear 

@@ -8,6 +8,7 @@
 %
 % Nelis Wilke, 18 November 2019
 % reviewed by Stefan J. Wijnholds, 18 November 2019
+% Copyright 2020. See the LICENSE file at the top-level directory of this distribution.
 
 close all;
 clear;

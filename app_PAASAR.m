@@ -1,8 +1,8 @@
-
 % This code simulates SH calibration on the PAASAR concept using GPS satellites from the European
 % and American constellations as calibration sources.
 
 % Nelis Wilke 18 May 2020
+% Copyright 2020. See the LICENSE file at the top-level directory of this distribution.
 
 clear
 close all
@@ -34,16 +34,16 @@ g_true = g_true / mean(abs(g_true));
 G = diag(g_true);
 
 % Import satellite positions
-load('data/GPSsat_altaz.mat');
-load('data/GPSsat_lm.mat');
+load('data/PAASAR/GPSsat_altaz.mat');
+load('data/PAASAR/GPSsat_lm.mat');
 
 % Import coordinates of PAASAR antenna elements
-antpos = load('data/PAASARantpos.mat');
+antpos = load('data/PAASAR/PAASARantpos.mat');
 antpos = antpos.pos;
 
 % Import normal vectors of PAASAR triangles. A triangle corresponds to a
 % segment of the icosahedron sphere.
-tri_n = load('data/PAASARnormals.mat');
+tri_n = load('data/PAASAR/PAASARnormals.mat');
 tri_n = tri_n.tri_n;
 
 %% Initialise
@@ -118,7 +118,7 @@ for date_id = 1:Ndates
         % Covariance matrix of calibration source only
         Sigma_c = (a_sat(:,calsat_ids(idx))*a_sat(:,calsat_ids(idx))');
         % Beamform to calibration source
-        Sigma_c = diag(a_bf')*Sigma_c*diag(a_bf')';
+        Sigma_c = diag(a_bf')*Sigma_c*diag(a_bf);
         % Calculate numerator of SIR
         num = mean(abs((ones(P,1)'*(Sigma_c)).'-diag(Sigma_c)));
         
@@ -129,6 +129,7 @@ for date_id = 1:Ndates
         
         % Calculate SIR (dB) for this source on this date
         SIR(calsat_ids(idx),date_id) = 10*log10(num/den);
+%         disp(['SIR: ' num2str(SIR)])
         
         %% SH calibration
         % Calibrate only when SIR > 6 dB
@@ -152,7 +153,7 @@ for date_id = 1:Ndates
                     % Apply true gains and beamforming weights
                     Sigma = (G*Sigma*G');
                     % Beamform to calibration source
-                    Sigma = diag(a_bf')*Sigma*diag(a_bf')';
+                    Sigma = diag(a_bf')*Sigma*diag(a_bf);
 
                     % Estimate gains using SH
                     [g_est,r1] = Self_Holography_iter(iter,g_prev,Sigma);
@@ -172,8 +173,9 @@ for date_id = 1:Ndates
     SIR_max(date_id) = max(SIR(:,date_id));
 end
 
-save(['sim_results/results_PAASAR.mat'], ...
-    'g_rmse','g_mag', 'g_phase','SIR','SIR_max');
+
+% save(['sim_results/results_PAASAR.mat'], ...
+%     'g_rmse','g_mag', 'g_phase','SIR','SIR_max');
 
 
 

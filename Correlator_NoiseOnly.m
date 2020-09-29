@@ -22,7 +22,8 @@ function [Sigma] = Correlator(sigma,SNR,Lsignal,l,EEP,D_elem,P,d,k)
 %   Sigma           : Array covariance matrix
 
 
-% CRW 10 February 2020
+% Nelis Wilke 10 February 2020
+% Copyright 2020. See the LICENSE file at the top-level directory of this distribution.
 
 % calibration source signal
 S = (sqrt(sigma).*(randn(1, Lsignal) + 1i * randn(1, Lsignal)))/sqrt(2);

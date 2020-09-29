@@ -16,7 +16,9 @@ function [g_iter,r1] = Self_Holography(iter,g_prev,Sigma)
 %   g_iter      : Estimated gains for current iteration  
 %   r1          : Crosscorrelation of reference signal and individual
 %                 antenna signals
-
+%
+% Nelis Wilke 10 February 202
+% Copyright 2020. See the LICENSE file at the top-level directory of this distribution.
 
 %% Start SH calibration
 

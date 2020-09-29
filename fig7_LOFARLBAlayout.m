@@ -2,7 +2,7 @@ close all
 clear
 
 % Import data
-load('data/LOFARantpos.mat')
+load('data/LOFARLBAantpos.mat')
 
 
 %% Plot LOFAR LBA antenna positions
